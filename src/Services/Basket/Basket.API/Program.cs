@@ -1,4 +1,5 @@
 using BuildingBlocks.Exceptions.Handler;
+using BuildingBlocks.Messaging.MassTransit;
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -47,6 +48,8 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 });
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+builder.Services.AddMessageBroker(builder.Configuration);
 
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database"))

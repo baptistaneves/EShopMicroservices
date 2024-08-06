@@ -1,20 +1,19 @@
-﻿namespace Ordering.Infrastructure.Data
+﻿namespace Ordering.Infrastructure.Data;
+
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
-    public class ApplicationDbContext : DbContext
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)  
+        : base(options) {  }
+
+    public DbSet<Customer> Customers => Set<Customer>();
+    public DbSet<Product> Products => Set<Product>();
+    public DbSet<Order> Orders => Set<Order>();
+    public DbSet<OrderItem> OrderItems => Set<OrderItem>();
+
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)  
-            : base(options) {  }
+        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        public DbSet<Customer> Customers => Set<Customer>();
-        public DbSet<Product> Products => Set<Product>();
-        public DbSet<Order> Orders => Set<Order>();
-        public DbSet<OrderItem> OrderItems => Set<OrderItem>();
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-            base.OnModelCreating(builder);
-        }
+        base.OnModelCreating(builder);
     }
 }

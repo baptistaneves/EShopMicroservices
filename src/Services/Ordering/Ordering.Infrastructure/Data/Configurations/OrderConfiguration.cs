@@ -32,7 +32,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             });
 
         builder.ComplexProperty(
-           o => o.ShippingAddres, addressBuilder =>
+           o => o.ShippingAddress, addressBuilder =>
            {
                addressBuilder.Property(a => a.FirstName)
                    .HasMaxLength(50)
@@ -61,7 +61,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
            });
 
         builder.ComplexProperty(
-          o => o.BillingAddres, addressBuilder =>
+          o => o.BillingAddress, addressBuilder =>
           {
               addressBuilder.Property(a => a.FirstName)
                    .HasMaxLength(50)
